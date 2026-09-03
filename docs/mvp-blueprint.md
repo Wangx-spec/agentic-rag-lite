@@ -35,7 +35,7 @@
 | 语言/框架 | Java 17 + Spring Boot 3.x（单 Maven 模块） | 用户熟悉；单模块降低骨架复杂度 |
 | LLM 调用 | 自研 OpenAI 兼容 HTTP 客户端 + SSE 解析 | 体现「原生实现」，面试讲得清协议细节 |
 | Embedding | OpenAI 兼容接口（在线，如硅基流动） | 与 LLM 同一套客户端 |
-| 向量库 | pgvector（Docker 起 postgres+pgvector） | 生产常用；备选本地内存向量 |
+| 向量库 | Qdrant（Docker 单容器，gRPC 客户端；VectorStore 接口可插拔，内存实现兜底） | 轻于 Milvus（无 etcd/MinIO）；payload 免回表；2026-09-03 由 pgvector 改定 |
 | BM25 | SQLite FTS5（JDBC 内置，零外部服务） | 替代 ES，一条依赖搞定关键词检索 |
 | 记忆 | Redis（可选，存摘要；会话内 N 轮用内存） | 轻量 |
 | 构建/部署 | Maven + Dockerfile + K8s Deployment（最小） | 社招工程化必备 |
@@ -60,7 +60,7 @@ com.yourapp.agenticrag/
 │   └── tools/                  # 内置工具（如 SearchKnowledgeBaseTool）
 ├── rag/            # RAG 能力
 │   ├── ingest/                 # 解析（PDF/文本）、分块（Fixed/StructureAware）、入库
-│   ├── index/                  # 向量索引(pgvector) + BM25(FTS5)
+│   ├── index/                  # 向量索引(Qdrant，VectorStore 接口) + BM25(FTS5)
 │   ├── retrieve/               # 双通道检索 + RRF 融合 + 重排
 │   └── eval/                   # 检索质量评估
 ├── llm/            # 模型层

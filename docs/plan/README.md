@@ -34,7 +34,7 @@ M1 ✅
 
 ## 全局约定
 
-- 技术栈：Java 17 + Spring Boot 3.3 + 手写 OpenAI 兼容客户端 + pgvector + SQLite FTS5 + Redis
+- 技术栈：Java 17 + Spring Boot 3.3 + 手写 OpenAI 兼容客户端 + Qdrant（VectorStore 接口可插拔）+ PostgreSQL（元数据）+ SQLite FTS5 + Redis
 - 不依赖 LangChain / Spring AI / ES / 消息队列（MVP 方案已定的取舍，勿中途加回）
 - 每个里程碑完成后 git commit 一次，message 前缀 `M{n}:`
 - 每个里程碑的「验收标准」就是它的 DoD，逐项过完才算完成
